@@ -15,7 +15,7 @@ Leakage-prevention strategy
 * StandardScaler is fitted ONLY on training data and applied to test data
   (fit_transform on train, transform-only on test).
 """
-
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -263,7 +263,9 @@ fig.suptitle(
     fontsize=16, fontweight='bold', y=1.002, color=PALETTE['dark']
 )
 
-out_path = '/mnt/user-data/outputs/student_prediction_results.png'
+
+#out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'student_prediction_results.png')
+out_path = os.path.dirname(os.path.abspath(__file__)) + '\\'
 plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor='white')
 plt.close()
 print(f"\n✅ Graph saved → {out_path}")
