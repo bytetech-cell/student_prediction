@@ -314,3 +314,30 @@ print(f"  ► Fail Probability   : {probability[0]*100:.2f}%")
 print("\n" + "=" * 60)
 print("  All 8 graphs saved successfully!")
 print("=" * 60)
+
+from sklearn.svm import SVC
+
+# Train model
+svm_model = SVC(probability=True)
+svm_model.fit(X_train, y_train)
+
+# Predictions
+y_pred = svm_model.predict(X_test)
+y_pred_proba = svm_model.predict_proba(X_test)[:, 1]
+
+# Metrics
+accuracy  = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall    = recall_score(y_test, y_pred)
+f1        = f1_score(y_test, y_pred)
+roc_auc   = roc_auc_score(y_test, y_pred_proba)
+
+# Print results
+print("🔹 SVM Results")
+print("Accuracy :", accuracy)
+print("Precision:", precision)
+print("Recall   :", recall)
+print("F1 Score :", f1)
+print("ROC-AUC  :", roc_auc)
+
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
